@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import TaskBlock from './components/TaskBlock/TaskBlock'
+import { initFirebase } from './redux/actions/appActions';
 
 function App() {
+  const dispatch = useDispatch();
+  const { isDataFailed } = useSelector(store => store.appReducer);
+
+  useEffect(() => {
+    dispatch(initFirebase());
+    console.log(isDataFailed)
+  }, [])
 
   return (
     <div>
-      
+
     </div>
   )
 }
