@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { setData } from "../reducers/appReducer";
+import { setData } from "../reducer/appReducer";
 import { FIREBASE_CONFIG } from "../../constants/constants";
 
 

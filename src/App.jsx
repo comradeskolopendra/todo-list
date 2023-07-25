@@ -6,16 +6,16 @@ import { initFirebase } from './redux/actions/appActions';
 
 function App() {
   const dispatch = useDispatch();
-  const { isDataFailed } = useSelector(store => store.appReducer);
+  const { data } = useSelector(store => store.appReducer);
 
   useEffect(() => {
     dispatch(initFirebase());
-    console.log(isDataFailed)
+    console.log(data);
   }, [])
 
   return (
     <div>
-
+      123123
     </div>
   )
 }
