@@ -1,36 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-export const initialState = {
-    data: null,
-    isDataFailed: false,
-    isDataLoading: false,
+const initialState = {
+    todos: []
 };
 
+const SET_DATA = "SET_DATA";
 
-const appSlice = createSlice({
-    name: "app",
-    initialState,
-    reducers: {
-        setDataFailed(state) {
-            state.isDataFailed = true;
-            state.isDataLoading = false;
-        },
-        setDataLoading(state) {
-            state.isDataFailed = false;
-            state.isDataLoading = true;
-        },
-        setData(state, action) {
-            state.data = action.payload;
-            state.isDataFailed = false;
-            state.isDataLoading = false;
-        }
+export const appReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case SET_DATA:
+            return { ...state, todos: [...state.todos, ...action.payload] };
+
+        default:
+            return state;
     }
-})
+}
 
-export const {
-    setDataFailed,
-    setData,
-    setDataLoading
-} = appSlice.actions;
-
-export default appSlice.reducer;
+export const setDataAction = (payload) => ({ type: SET_DATA, payload })

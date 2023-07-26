@@ -1,11 +1,12 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import appReducer from './reducer/appReducer';
+import { applyMiddleware, combineReducers, createStore } from '@reduxjs/toolkit';
+import { appReducer } from './reducer/appReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-const store = combineReducers({
-    app: appReducer
+const rootReducer = combineReducers({
+    appReducer
 })
 
-export default configureStore({
-    reducer: store,
-    middleware: [...getDefaultMiddleware()],
-})
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+
+export default store;
