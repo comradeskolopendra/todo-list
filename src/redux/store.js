@@ -1,7 +1,11 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { appReducer } from "./reducer";
+import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import appReducer from './reducer/appReducer';
+
+const store = combineReducers({
+    app: appReducer
+})
 
 export default configureStore({
-    reducer: { appReducer },
-    middleware: [...getDefaultMiddleware()]
+    reducer: store,
+    middleware: [...getDefaultMiddleware()],
 })

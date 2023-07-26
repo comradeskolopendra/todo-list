@@ -1,20 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getDocs } from "firebase/firestore";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
     data: null,
     isDataFailed: false,
     isDataLoading: false,
 };
-
-// export const getPosts = createAsyncThunk('data/getData', async (thunkAPI) => {
-//     try {
-//         const res = await getDocs(firestore)
-//         return res.data
-//     } catch (err) {
-//         return thunkAPI.rejectWithValue({ error: err.message })
-//     }
-// })
 
 
 const appSlice = createSlice({
