@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
-  const { todos } = useSelector((store) => store.appReducer);
+  const { todos } = useSelector((store) => store);
 
   useEffect(() => {
     dispatch(fetchFirebase());
