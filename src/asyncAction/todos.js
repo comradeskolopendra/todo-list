@@ -1,21 +1,42 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { setDataAction, setTodosIDs } from "../redux/reducer/appReducer";
+import { initFirestore } from "../helpers/constants";
+import { addDoc, getDocs, doc, deleteDoc } from "firebase/firestore";
 
-import { FIREBASE_CONFIG } from "../helpers/constants";
-import { setDataAction } from "../redux/reducer/appReducer";
+const { firestoreRef, firestoreDB } = await initFirestore();
 
-const fetchFirebase = () => async (dispatch) => {
-    const firebaseApp = initializeApp(FIREBASE_CONFIG);
-    const firestoreDB = getFirestore(firebaseApp);
-
-    const firestoreRef = collection(firestoreDB, "todos");
+const fetchFirestore = () => {
+  return async (dispatch) => {
     const firestoreSnap = await getDocs(firestoreRef);
 
-    const data = [...firestoreSnap.docs.map(element => element.data())];
+    dispatch(setDataAction([...firestoreSnap.docs.map((element) => element)]));
 
-    dispatch(setDataAction(data))
-}
+    dispatch(setTodosIDs([...firestoreSnap.docs.map((element) => element.id)]));
+  };
+};
 
-export {
-    fetchFirebase
-}
+const addTodo = ({ isDone, label }) => {
+  return async (dispatch) => {
+    const firestoreSnap = await getDocs(firestoreRef);
+
+    addDoc(firestoreRef, {
+      isDone,
+      label,
+    }).then((docRef) => console.log(docRef.id));
+
+    dispatch(setDataAction([...firestoreSnap.docs.map((element) => element)]));
+  };
+};
+
+const deleteTodo = (id) => {
+  return async (dispatch) => {
+    const firestoreSnap = await getDocs(firestoreRef);
+
+    deleteDoc(doc(firestoreDB, "todos", id)).then(() =>
+      console.log("deleted doc")
+    );
+
+    dispatch(setDataAction([...firestoreSnap.docs.map((element) => element)]));
+  };
+};
+
+export { fetchFirestore, addTodo, deleteTodo };
