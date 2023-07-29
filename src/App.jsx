@@ -53,7 +53,7 @@ function App() {
         <div>Нет данных</div>
       )}
 
-      <button onClick={handlerOnOpen}>Добавить ещё одну заметку</button>
+      <button className={styles.button} onClick={handlerOnOpen}>Добавить ещё одну заметку</button>
 
       {isModalOpened ? (
         <Modal
