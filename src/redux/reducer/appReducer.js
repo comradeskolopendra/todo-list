@@ -18,11 +18,17 @@ const appReducer = createSlice({
     },
     updateModalOpened(state, action) {
       state.isModalOpened = action.payload;
+    },
+    deleteTodoID(state, action) {
+      state.todosIDs = state.todosIDs.filter(element => element !== action.payload);
+    },
+    addTodoID(state, action) {
+      state.todosIDs = [...state.todosIDs, action.payload];
     }
   },
 });
 
-export const { setDataAction, setTodosIDs, updateModalOpened } =
+export const { setDataAction, setTodosIDs, updateModalOpened, deleteTodoID, addTodoID } =
   appReducer.actions;
 
 export default appReducer.reducer;

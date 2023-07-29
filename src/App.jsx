@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { addTodo, deleteTodo, fetchFirestore } from "./asyncAction/todos";
+import { handlerOnShapshot } from "./asyncAction/todos";
+import { addTodo, deleteTodo } from "./helpers/helpers";
 
 import Modal from "./components/Modal/modal";
 import styles from "./app.module.sass";
@@ -15,11 +16,11 @@ function App() {
     event.preventDefault();
 
     const form = event.target;
-    const [input] = form.elements;
+    const { input } = form.elements;
 
-    await dispatch(addTodo({ isDone: false, label: input.value }));
-    await dispatch(fetchFirestore());
-    
+    addTodo({ isDone: false, label: input.value });
+    dispatch(handlerOnShapshot());
+
     form.reset();
   };
 
@@ -32,11 +33,12 @@ function App() {
   };
 
   const handlerOnDelete = (id) => {
-    dispatch(deleteTodo(id));
+    deleteTodo(id);
+    dispatch(handlerOnShapshot());
   };
 
   useEffect(() => {
-    dispatch(fetchFirestore());
+    dispatch(handlerOnShapshot());
   }, []);
 
   return (
