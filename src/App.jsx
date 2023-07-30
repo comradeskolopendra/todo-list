@@ -39,10 +39,10 @@ function App() {
 
   return (
     <>
-      <div className={styles.blockWrapper}>
+      <main className={styles.blockWrapper}>
         <TaskBlock />
         <button className={styles.button} onClick={handlerOnOpen}>Добавить ещё одну заметку</button>
-      </div>
+      </main>
 
       {isModalOpened ? (
         <Modal
@@ -52,6 +52,9 @@ function App() {
       ) : (
         ""
       )}
+      <footer className={styles.footer}>
+        © Skolopendrovskie Dela 2023
+      </footer>
     </>
   );
 }
