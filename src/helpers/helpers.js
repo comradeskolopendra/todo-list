@@ -1,4 +1,4 @@
-import { doc, addDoc, deleteDoc } from "firebase/firestore";
+import { doc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { initFirestore } from "./constants";
 
 const { firestoreDB, firestoreRef } = initFirestore();
@@ -14,4 +14,9 @@ const addTodo = ({ isDone, label }) => {
     });
 };
 
-export { addTodo, deleteTodo }
+const updateTodo = async (isDone, id) => {
+    const documentRef = doc(firestoreDB, "todos", id);
+    await updateDoc(documentRef, { isDone }).then(() => console.log("updated"));
+}
+
+export { addTodo, deleteTodo, updateTodo }

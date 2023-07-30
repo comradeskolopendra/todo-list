@@ -1,30 +1,40 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handlerOnShapshot } from "../../asyncAction/todos";
-import { deleteTodo } from "../../helpers/helpers";
+import { deleteTodo, updateTodo } from "../../helpers/helpers";
 
 import Task from "./Task/task";
 import styles from "./taskBlock.module.sass";
 
 const TaskBlock = () => {
-
+    const dispatch = useDispatch();
     const { todos } = useSelector(store => store)
 
     const handlerOnDelete = (id) => {
-        setTimeout(() => {
-            deleteTodo(id);
-            dispatch(handlerOnShapshot());
-        }, 3000)
+        deleteTodo(id);
+        dispatch(handlerOnShapshot());
+    };
+
+    const handlerOnChange = async (id, isDone) => {
+        await updateTodo(isDone, id)
+        dispatch(handlerOnShapshot());
     };
 
     return (
         <div className={styles.wrapper}>
             {todos.length !== 0 ? (
                 todos.map((element) => (
-                    <Task onClick={() => handlerOnDelete(element.id)} label={element.data().label} isDone={element.data().isDone} />
+                    <Task
+                        handlerOnChange={handlerOnChange}
+                        handlerOnDelete={handlerOnDelete}
+                        id={element.id}
+                        key={element.id}
+                        label={element.data().label}
+                        isDone={element.data().isDone}
+                    />
                 ))
             ) : (
-                <div>Нет данных</div>
+                <div className={styles.nullData}>Нет данных</div>
             )}
         </div>
     );
