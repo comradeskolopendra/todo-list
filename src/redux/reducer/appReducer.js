@@ -4,6 +4,7 @@ export const initialState = {
   todos: [],
   todosIDs: [],
   isModalOpened: false,
+  isEdit: false
 };
 
 const appReducer = createSlice({
@@ -24,11 +25,14 @@ const appReducer = createSlice({
     },
     addTodoID(state, action) {
       state.todosIDs = [...state.todosIDs, action.payload];
+    },
+    updateEditMode(state, action) {
+      state.isEdit = action.payload;
     }
   },
 });
 
-export const { setDataAction, setTodosIDs, updateModalOpened, deleteTodoID, addTodoID } =
+export const { setDataAction, setTodosIDs, updateModalOpened, deleteTodoID, addTodoID, updateEditMode } =
   appReducer.actions;
 
 export default appReducer.reducer;

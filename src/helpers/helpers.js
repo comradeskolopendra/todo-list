@@ -14,9 +14,9 @@ const addTodo = ({ isDone, label }) => {
     });
 };
 
-const updateTodo = async (isDone, id) => {
+const updateTodo = async (label, isDone, id) => {
     const documentRef = doc(firestoreDB, "todos", id);
-    await updateDoc(documentRef, { isDone }).then(() => console.log("updated"));
+    await updateDoc(documentRef, { label, isDone }).then(() => console.log("updated"));
 }
 
 export { addTodo, deleteTodo, updateTodo }

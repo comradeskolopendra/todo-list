@@ -2,7 +2,7 @@
 import styles from "./modal.module.sass";
 import close from "../../assets/close.svg";
 
-const Modal = ({ handlerOnSubmit, handlerOnClose }) => {
+const Modal = ({ handlerOnSubmit, handlerOnClose, buttonLabel }) => {
 
   return (
     <div className={styles.modalWrapper}>
@@ -11,7 +11,7 @@ const Modal = ({ handlerOnSubmit, handlerOnClose }) => {
           <img src={close} alt="" />
         </button>
         <input type="text" name="input" id="input" placeholder="label" />
-        <button type="submit">add todo</button>
+        <button type="submit">{buttonLabel}</button>
       </form>
     </div>
   );

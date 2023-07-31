@@ -48,6 +48,7 @@ function App() {
         <Modal
           handlerOnClose={handlerOnClose}
           handlerOnSubmit={handlerOnSubmit}
+          buttonLabel={"add todo"}
         />
       ) : (
         ""

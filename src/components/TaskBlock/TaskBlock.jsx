@@ -15,8 +15,8 @@ const TaskBlock = () => {
         dispatch(handlerOnShapshot());
     };
 
-    const handlerOnChange = async (id, isDone) => {
-        await updateTodo(isDone, id)
+    const handlerOnChange = async (label, isDone, id) => {
+        updateTodo(label, isDone, id)
         dispatch(handlerOnShapshot());
     };
 
